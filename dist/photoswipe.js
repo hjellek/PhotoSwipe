@@ -1,6 +1,6 @@
-/*! PhotoSwipe - v4.1.2 - 2017-04-05
+/*! PhotoSwipe - v4.1.2 - 2018-02-22
 * http://photoswipe.com
-* Copyright (c) 2017 Dmitry Semenov; */
+* Copyright (c) 2018 Dmitry Semenov; */
 (function (root, factory) { 
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
@@ -1101,8 +1101,11 @@ var publicMethods = {
 		_currPanBounds = self.currItem.bounds;	
 		_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
 
-		_panOffset.x = _currPanBounds.center.x;
-		_panOffset.y = _currPanBounds.center.y;
+		if(_currPanBounds)
+		{
+			_panOffset.x = _currPanBounds.center.x;
+			_panOffset.y = _currPanBounds.center.y;
+		}
 
 		if(emulateSetContent) {
 			_shout('afterChange');
@@ -2723,6 +2726,9 @@ var _getItemAt,
 	},
 	_calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH ) {
 		var bounds = item.bounds;
+		if(!item.vGap) {
+			item.vGap = {top:0,bottom:0};
+		}
 
 		// position of element when it's centered
 		bounds.center.x = Math.round((_tempPanAreaSize.x - realPanElementW) / 2);
