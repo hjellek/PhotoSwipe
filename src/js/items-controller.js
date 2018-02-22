@@ -32,6 +32,9 @@ var _getItemAt,
 	},
 	_calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH ) {
 		var bounds = item.bounds;
+		if(!item.vGap) {
+			item.vGap = {top:0,bottom:0};
+		}
 
 		// position of element when it's centered
 		bounds.center.x = Math.round((_tempPanAreaSize.x - realPanElementW) / 2);
